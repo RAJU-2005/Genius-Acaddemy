@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Genius Academy</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal-blue': '#2563EB',
+                        'bright-yellow': '#FCD34D',
+                        'strong-red': '#DC2626',
+                        'brand-black': '#000000',
+                        'brand-white': '#FFFFFF'
+                    },
+                    fontFamily: {
+                        'raleway': ['Raleway', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'source-sans': ['Source Sans 3', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1D4ED8, #2563EB);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+        }
+    </style>
+</head>
+<body class="font-source-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-brand-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="font-raleway text-2xl font-bold text-royal-blue">GENIUS ACADEMY</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="courses.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Courses</a>
+                        <a href="about.html" class="font-montserrat text-royal-blue px-3 py-2 text-sm font-medium">About Us</a>
+                        <a href="contact.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Contact Us</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="auth.html" class="font-montserrat btn-primary text-brand-white px-6 py-2 rounded-lg text-sm font-semibold">Login / Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-poppins text-4xl lg:text-6xl font-bold text-brand-white mb-6">About Genius Academy</h1>
+                <p class="font-source-sans text-xl text-bright-yellow max-w-3xl mx-auto">
+                    Empowering students with quality education and innovative learning solutions since 2015
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="py-20 bg-brand-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="font-poppins text-3xl font-bold text-brand-black mb-6">Our Mission</h2>
+                    <p class="font-source-sans text-lg text-gray-700 mb-6 leading-relaxed">
+                        At Genius Academy, we believe that every student has the potential to excel. Our mission is to provide 
+                        high-quality education that combines traditional teaching methods with modern technology, creating an 
+                        environment where learning becomes engaging, effective, and enjoyable.
+                    </p>
+                    <p class="font-source-sans text-lg text-gray-700 leading-relaxed">
+                        We are committed to nurturing talent, building confidence, and preparing students for academic success 
+                        and future challenges through personalized attention and innovative teaching methodologies.
+                    </p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-2xl">
+                    <h2 class="font-poppins text-3xl font-bold text-brand-black mb-6">Our Vision</h2>
+                    <p class="font-source-sans text-lg text-gray-700 mb-6 leading-relaxed">
+                        To become the leading educational institution that transforms the way students learn, making quality 
+                        education accessible to all and setting new standards in academic excellence.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-royal-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="font-source-sans text-gray-700">Excellence in education delivery</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-royal-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="font-source-sans text-gray-700">Innovation in teaching methods</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-royal-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="font-source-sans text-gray-700">Holistic student development</span>
+                        </li>
+                        <li class="flex items-center">
+                            <svg class="w-6 h-6 text-royal-blue mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            <span class="font-source-sans text-gray-700">Technology integration in learning</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-4">Our Achievements</h2>
+                <p class="font-source-sans text-lg text-gray-600">Numbers that speak for our success</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-royal-blue mb-2" data-count="15000">0</div>
+                    <div class="font-source-sans text-gray-600">Students Taught</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-bright-yellow mb-2" data-count="95">0</div>
+                    <div class="font-source-sans text-gray-600">% Success Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-strong-red mb-2" data-count="120">0</div>
+                    <div class="font-source-sans text-gray-600">Expert Teachers</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-bold text-royal-blue mb-2" data-count="10">0</div>
+                    <div class="font-source-sans text-gray-600">Years Experience</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Teachers -->
+    <section class="py-20 bg-brand-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-4">Meet Our Expert Teachers</h2>
+                <p class="font-source-sans text-lg text-gray-600 max-w-2xl mx-auto">
+                    Learn from the best minds in education with years of experience in competitive exam preparation
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Teacher 1 -->
+                <div class="card-hover bg-gray-50 rounded-2xl p-8 text-center">
+                    <img src="https://kimi-web-img.moonshot.cn/img/fiverr-res.cloudinary.com/ed85361497779a56c40517fea4021da1e94b2310.jpeg" 
+                         alt="Dr. Rajesh Kumar" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Dr. Rajesh Kumar</h3>
+                    <p class="font-source-sans text-royal-blue font-semibold mb-4">Mathematics Expert</p>
+                    <p class="font-source-sans text-gray-600 text-sm mb-4">
+                        PhD in Mathematics from IIT Bombay with 15 years of teaching experience. Specialized in JEE Advanced preparation.
+                    </p>
+                    <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                        <span>15+ Years</span>
+                        <span>•</span>
+                        <span>5000+ Students</span>
+                    </div>
+                </div>
+
+                <!-- Teacher 2 -->
+                <div class="card-hover bg-gray-50 rounded-2xl p-8 text-center">
+                    <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/7f43fec92f96d0b3086be63f0eaa32b40040251f.jpg" 
+                         alt="Dr. Priya Sharma" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Dr. Priya Sharma</h3>
+                    <p class="font-source-sans text-royal-blue font-semibold mb-4">Physics Specialist</p>
+                    <p class="font-source-sans text-gray-600 text-sm mb-4">
+                        M.Sc Physics from Delhi University, gold medalist. Expert in conceptual teaching and problem-solving techniques.
+                    </p>
+                    <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                        <span>12+ Years</span>
+                        <span>•</span>
+                        <span>4000+ Students</span>
+                    </div>
+                </div>
+
+                <!-- Teacher 3 -->
+                <div class="card-hover bg-gray-50 rounded-2xl p-8 text-center">
+                    <img src="https://kimi-web-img.moonshot.cn/img/media.sciencephoto.com/4515a985aaf1252b87e68af5ec1a45e6333122c7.jpg" 
+                         alt="Prof. Anil Patel" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Prof. Anil Patel</h3>
+                    <p class="font-source-sans text-royal-blue font-semibold mb-4">Chemistry Guru</p>
+                    <p class="font-source-sans text-gray-600 text-sm mb-4">
+                        PhD in Organic Chemistry from IISc Bangalore. Renowned for simplifying complex chemical reactions.
+                    </p>
+                    <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                        <span>18+ Years</span>
+                        <span>•</span>
+                        <span>6000+ Students</span>
+                    </div>
+                </div>
+
+                <!-- Teacher 4 -->
+                <div class="card-hover bg-gray-50 rounded-2xl p-8 text-center">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.iona.edu/d41847eea1654664db4ce0e9e225cdceeee332fc.jpg" 
+                         alt="Dr. Sunita Verma" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Dr. Sunita Verma</h3>
+                    <p class="font-source-sans text-royal-blue font-semibold mb-4">Biology Expert</p>
+                    <p class="font-source-sans text-gray-600 text-sm mb-4">
+                        MBBS from AIIMS, specialized in human physiology and genetics. NEET preparation specialist.
+                    </p>
+                    <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                        <span>10+ Years</span>
+                        <span>•</span>
+                        <span>3500+ Students</span>
+                    </div>
+                </div>
+
+                <!-- Teacher 5 -->
+                <div class="card-hover bg-gray-50 rounded-2xl p-8 text-center">
+                    <img src="https://kimi-web-img.moonshot.cn/img/www.readingandwritinghaven.com/a213a61bd09e5111e221e78e6a36bb142ef526de.jpeg" 
+                         alt="Ms. Kavita Singh" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Ms. Kavita Singh</h3>
+                    <p class="font-source-sans text-royal-blue font-semibold mb-4">English Literature</p>
+                    <p class="font-source-sans text-gray-600 text-sm mb-4">
+                        MA in English Literature from JNU. Expert in language skills and literature analysis for board exams.
+                    </p>
+                    <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                        <span>8+ Years</span>
+                        <span>•</span>
+                        <span>2500+ Students</span>
+                    </div>
+                </div>
+
+                <!-- Teacher 6 -->
+                <div class="card-hover bg-gray-50 rounded-2xl p-8 text-center">
+                    <img src="https://kimi-web-img.moonshot.cn/img/wpvip.edutopia.org/7b5c5445d8776e5e113a7f57693a00848610ca8c.jpg" 
+                         alt="Mr. Rohan Mehta" class="w-32 h-32 rounded-full mx-auto mb-6 object-cover">
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Mr. Rohan Mehta</h3>
+                    <p class="font-source-sans text-royal-blue font-semibold mb-4">Computer Science</p>
+                    <p class="font-source-sans text-gray-600 text-sm mb-4">
+                        BTech in Computer Science from IIT Delhi. Expert in programming languages and competitive coding.
+                    </p>
+                    <div class="flex justify-center space-x-4 text-sm text-gray-500">
+                        <span>6+ Years</span>
+                        <span>•</span>
+                        <span>2000+ Students</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-4">Why Choose Genius Academy?</h2>
+                <p class="font-source-sans text-lg text-gray-600">What makes us different from other coaching institutes</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-royal-blue rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Proven Track Record</h3>
+                    <p class="font-source-sans text-gray-600">95% success rate with consistent top results in board exams and competitive tests.</p>
+                </div>
+                
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-bright-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Personalized Attention</h3>
+                    <p class="font-source-sans text-gray-600">Small batch sizes ensure individual attention and customized learning paths for each student.</p>
+                </div>
+                
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-strong-red rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 4a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8zm8 0a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V8zm0 4a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1v-2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Modern Infrastructure</h3>
+                    <p class="font-source-sans text-gray-600">State-of-the-art classrooms with digital learning tools and interactive teaching methods.</p>
+                </div>
+                
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-royal-blue rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Comprehensive Study Material</h3>
+                    <p class="font-source-sans text-gray-600">Well-researched study materials, practice papers, and online resources for effective learning.</p>
+                </div>
+                
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-bright-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">24/7 Doubt Support</h3>
+                    <p class="font-source-sans text-gray-600">Round-the-clock doubt resolution through online platforms and dedicated support teams.</p>
+                </div>
+                
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-strong-red rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"/>
+                            <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Performance Analytics</h3>
+                    <p class="font-source-sans text-gray-600">Regular assessments, detailed progress reports, and data-driven insights for improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-brand-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-raleway text-2xl font-bold text-royal-blue mb-4">GENIUS ACADEMY</h3>
+                    <p class="font-source-sans text-gray-300 mb-4">Where Learning Never Stops</p>
+                    <p class="font-source-sans text-gray-400 text-sm">
+                        Empowering students with quality education and innovative learning solutions since 2015.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Home</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Courses</a></li>
+                        <li><a href="about.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2">
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 9-10</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 11-12</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">JEE Preparation</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">CAT Preparation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2">
+                        <li class="font-source-sans text-gray-300">📧 info@geniusacademy.com</li>
+                        <li class="font-source-sans text-gray-300">📞 +91 98765 43210</li>
+                        <li class="font-source-sans text-gray-300">📍 123 Education Street, Mumbai, MH 400001</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="font-source-sans text-gray-400 text-sm">
+                    © 2025 Genius Academy. All rights reserved. | Privacy Policy | Terms of Service
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Animate statistics counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('[data-count]');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    counter.textContent = Math.floor(current);
+                }, 16);
+            });
+        }
+        
+        // Initialize animations when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(animateCounters, 500);
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

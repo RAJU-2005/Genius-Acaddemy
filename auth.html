@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication - Genius Academy</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal-blue': '#2563EB',
+                        'bright-yellow': '#FCD34D',
+                        'strong-red': '#DC2626',
+                        'brand-black': '#000000',
+                        'brand-white': '#FFFFFF'
+                    },
+                    fontFamily: {
+                        'raleway': ['Raleway', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'source-sans': ['Source Sans 3', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1D4ED8, #2563EB);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #FCD34D, #FBBF24);
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(252, 211, 77, 0.3);
+        }
+        
+        .role-card {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .role-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .role-card.active {
+            border-color: #2563EB;
+            background: linear-gradient(135deg, #EBF4FF, #DBEAFE);
+        }
+        
+        .auth-tab {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-tab.active {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            color: white;
+        }
+        
+        .form-input:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+    </style>
+</head>
+<body class="font-source-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-brand-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <h1 class="font-raleway text-2xl font-bold text-royal-blue">GENIUS ACADEMY</h1>
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="courses.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Courses</a>
+                        <a href="about.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">About Us</a>
+                        <a href="contact.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Contact Us</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <span class="font-montserrat text-royal-blue px-3 py-2 text-sm font-medium">Authentication</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-poppins text-4xl lg:text-6xl font-bold text-brand-white mb-6">Welcome to Genius Academy</h1>
+                <p class="font-source-sans text-xl text-bright-yellow max-w-3xl mx-auto">
+                    Choose your role and join our learning community
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Role Selection -->
+    <section class="py-16 bg-brand-white" id="role-selection">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-4">Select Your Role</h2>
+                <p class="font-source-sans text-lg text-gray-600 max-w-2xl mx-auto">
+                    Choose how you want to continue with Genius Academy
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Student Role -->
+                <div class="role-card bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 text-center" data-role="student">
+                    <div class="w-20 h-20 bg-royal-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-2xl font-semibold text-brand-black mb-4">Student</h3>
+                    <p class="font-source-sans text-gray-600 mb-6">
+                        Access courses, timetable, study materials, quizzes, assignments, attendance tracking, fees, and performance analytics.
+                    </p>
+                    <button class="font-montserrat btn-primary text-brand-white px-8 py-3 rounded-lg font-semibold">
+                        Continue as Student
+                    </button>
+                </div>
+
+                <!-- Teacher Role -->
+                <div class="role-card bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 text-center" data-role="teacher">
+                    <div class="w-20 h-20 bg-bright-yellow rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-2xl font-semibold text-brand-black mb-4">Teacher</h3>
+                    <p class="font-source-sans text-gray-600 mb-6">
+                        Manage classes, take attendance, upload study materials, create assignments and quizzes, and resolve student doubts.
+                    </p>
+                    <button class="font-montserrat btn-primary text-brand-white px-8 py-3 rounded-lg font-semibold">
+                        Continue as Teacher
+                    </button>
+                </div>
+
+                <!-- Admin Role -->
+                <div class="role-card bg-gray-50 border-2 border-gray-200 rounded-2xl p-8 text-center" data-role="admin">
+                    <div class="w-20 h-20 bg-strong-red rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-10 h-10 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-2xl font-semibold text-brand-black mb-4">Admin</h3>
+                    <p class="font-source-sans text-gray-600 mb-6">
+                        Control students, teachers, courses, fees management, analytics, and system-wide notifications.
+                    </p>
+                    <button class="font-montserrat btn-primary text-brand-white px-8 py-3 rounded-lg font-semibold">
+                        Continue as Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Authentication Forms -->
+    <section class="py-16 bg-gray-50" id="auth-forms" style="display: none;">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Student Authentication -->
+            <div class="auth-form bg-brand-white p-8 rounded-2xl shadow-lg" data-role="student" style="display: none;">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-6 text-center">Student Portal</h2>
+                
+                <!-- Login/Signup Tabs -->
+                <div class="flex mb-8 bg-gray-100 rounded-lg p-1">
+                    <button class="auth-tab flex-1 py-3 rounded-md font-montserrat font-semibold text-center active" data-form="login">
+                        Login
+                    </button>
+                    <button class="auth-tab flex-1 py-3 rounded-md font-montserrat font-semibold text-center" data-form="signup">
+                        Sign Up
+                    </button>
+                </div>
+                
+                <!-- Login Form -->
+                <div class="form-section" data-form="login">
+                    <form class="login-form space-y-6">
+                        <div>
+                            <label for="student-email-login" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="student-email-login" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter your email">
+                        </div>
+                        
+                        <div>
+                            <label for="student-password-login" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                            <input type="password" id="student-password-login" name="password" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded">
+                                <span class="font-source-sans ml-2 text-sm text-gray-600">Remember me</span>
+                            </label>
+                            <a href="#" class="font-source-sans text-sm text-royal-blue hover:underline">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold text-lg">
+                            Login as Student
+                        </button>
+                        
+                        <div class="text-center">
+                            <button type="button" class="font-montserrat btn-secondary w-full py-3 rounded-lg font-semibold">
+                                Continue with Google
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="form-section" data-form="signup" style="display: none;">
+                    <form class="signup-form space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="student-firstname" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                <input type="text" id="student-firstname" name="firstName" required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                       placeholder="Enter first name">
+                            </div>
+                            <div>
+                                <label for="student-lastname" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                <input type="text" id="student-lastname" name="lastName" required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                       placeholder="Enter last name">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="student-email-signup" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="student-email-signup" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter your email">
+                        </div>
+                        
+                        <div>
+                            <label for="student-phone" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+                            <input type="tel" id="student-phone" name="phone" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter phone number">
+                        </div>
+                        
+                        <div>
+                            <label for="student-password-signup" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                            <input type="password" id="student-password-signup" name="password" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Create a password">
+                        </div>
+                        
+                        <div>
+                            <label for="student-confirm-password" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Confirm Password *</label>
+                            <input type="password" id="student-confirm-password" name="confirmPassword" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Confirm your password">
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <input type="checkbox" id="student-terms" name="terms" required class="mt-1 mr-3 h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded">
+                            <label for="student-terms" class="font-source-sans text-sm text-gray-600">
+                                I agree to the <a href="#" class="text-royal-blue hover:underline">Terms of Service</a> and 
+                                <a href="#" class="text-royal-blue hover:underline">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold text-lg">
+                            Create Student Account
+                        </button>
+                        
+                        <div class="text-center">
+                            <button type="button" class="font-montserrat btn-secondary w-full py-3 rounded-lg font-semibold">
+                                Continue with Google
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Teacher Authentication -->
+            <div class="auth-form bg-brand-white p-8 rounded-2xl shadow-lg" data-role="teacher" style="display: none;">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-6 text-center">Teacher Portal</h2>
+                
+                <!-- Login/Signup Tabs -->
+                <div class="flex mb-8 bg-gray-100 rounded-lg p-1">
+                    <button class="auth-tab flex-1 py-3 rounded-md font-montserrat font-semibold text-center active" data-form="login">
+                        Login
+                    </button>
+                    <button class="auth-tab flex-1 py-3 rounded-md font-montserrat font-semibold text-center" data-form="signup">
+                        Sign Up
+                    </button>
+                </div>
+                
+                <!-- Login Form -->
+                <div class="form-section" data-form="login">
+                    <form class="login-form space-y-6">
+                        <div>
+                            <label for="teacher-email-login" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="teacher-email-login" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter your email">
+                        </div>
+                        
+                        <div>
+                            <label for="teacher-password-login" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                            <input type="password" id="teacher-password-login" name="password" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter your password">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded">
+                                <span class="font-source-sans ml-2 text-sm text-gray-600">Remember me</span>
+                            </label>
+                            <a href="#" class="font-source-sans text-sm text-royal-blue hover:underline">Forgot password?</a>
+                        </div>
+                        
+                        <button type="submit" class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold text-lg">
+                            Login as Teacher
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Signup Form -->
+                <div class="form-section" data-form="signup" style="display: none;">
+                    <form class="signup-form space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="teacher-firstname" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                <input type="text" id="teacher-firstname" name="firstName" required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                       placeholder="Enter first name">
+                            </div>
+                            <div>
+                                <label for="teacher-lastname" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                <input type="text" id="teacher-lastname" name="lastName" required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                       placeholder="Enter last name">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="teacher-subject" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Subject Specialization *</label>
+                            <select id="teacher-subject" name="subject" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent">
+                                <option value="">Select your subject</option>
+                                <option value="mathematics">Mathematics</option>
+                                <option value="physics">Physics</option>
+                                <option value="chemistry">Chemistry</option>
+                                <option value="biology">Biology</option>
+                                <option value="english">English</option>
+                                <option value="computer-science">Computer Science</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="teacher-email-signup" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="teacher-email-signup" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter your email">
+                        </div>
+                        
+                        <div>
+                            <label for="teacher-password-signup" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Password *</label>
+                            <input type="password" id="teacher-password-signup" name="password" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Create a password">
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <input type="checkbox" id="teacher-terms" name="terms" required class="mt-1 mr-3 h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded">
+                            <label for="teacher-terms" class="font-source-sans text-sm text-gray-600">
+                                I agree to the <a href="#" class="text-royal-blue hover:underline">Terms of Service</a> and 
+                                <a href="#" class="text-royal-blue hover:underline">Privacy Policy</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold text-lg">
+                            Create Teacher Account
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Authentication -->
+            <div class="auth-form bg-brand-white p-8 rounded-2xl shadow-lg" data-role="admin" style="display: none;">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-6 text-center">Admin Portal</h2>
+                
+                <!-- Admin Login Form -->
+                <div class="form-section" data-form="login">
+                    <form class="login-form space-y-6">
+                        <div>
+                            <label for="admin-email-login" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Admin Email *</label>
+                            <input type="email" id="admin-email-login" name="email" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter admin email">
+                        </div>
+                        
+                        <div>
+                            <label for="admin-password-login" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Admin Password *</label>
+                            <input type="password" id="admin-password-login" name="password" required
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue focus:border-transparent"
+                                   placeholder="Enter admin password">
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <label class="flex items-center">
+                                <input type="checkbox" class="h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded">
+                                <span class="font-source-sans ml-2 text-sm text-gray-600">Remember me</span>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold text-lg">
+                            Login as Admin
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-brand-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-raleway text-2xl font-bold text-royal-blue mb-4">GENIUS ACADEMY</h3>
+                    <p class="font-source-sans text-gray-300 mb-4">Where Learning Never Stops</p>
+                    <p class="font-source-sans text-gray-400 text-sm">
+                        Empowering students with quality education and innovative learning solutions since 2015.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Home</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Courses</a></li>
+                        <li><a href="about.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2">
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 9-10</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 11-12</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">JEE Preparation</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">CAT Preparation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2">
+                        <li class="font-source-sans text-gray-300">📧 info@geniusacademy.com</li>
+                        <li class="font-source-sans text-gray-300">📞 +91 98765 43210</li>
+                        <li class="font-source-sans text-gray-300">📍 123 Education Street, Mumbai, MH 400001</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="font-source-sans text-gray-400 text-sm">
+                    © 2025 Genius Academy. All rights reserved. | Privacy Policy | Terms of Service
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

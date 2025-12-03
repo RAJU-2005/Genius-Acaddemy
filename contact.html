@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Genius Academy</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal-blue': '#2563EB',
+                        'bright-yellow': '#FCD34D',
+                        'strong-red': '#DC2626',
+                        'brand-black': '#000000',
+                        'brand-white': '#FFFFFF'
+                    },
+                    fontFamily: {
+                        'raleway': ['Raleway', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'source-sans': ['Source Sans 3', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1D4ED8, #2563EB);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+        }
+        
+        .form-input:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+    </style>
+</head>
+<body class="font-source-sans bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-brand-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="font-raleway text-2xl font-bold text-royal-blue">GENIUS ACADEMY</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="courses.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Courses</a>
+                        <a href="about.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">About Us</a>
+                        <a href="contact.html" class="font-montserrat text-royal-blue px-3 py-2 text-sm font-medium">Contact Us</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="auth.html" class="font-montserrat btn-primary text-brand-white px-6 py-2 rounded-lg text-sm font-semibold">Login / Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="font-poppins text-4xl lg:text-6xl font-bold text-brand-white mb-6">Contact Us</h1>
+                <p class="font-source-sans text-xl text-bright-yellow max-w-3xl mx-auto">
+                    Get in touch with us for any queries, admissions, or support
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="py-16 bg-brand-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-royal-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Visit Our Institute</h3>
+                    <p class="font-source-sans text-gray-600">
+                        123 Education Street<br>
+                        Mumbai, Maharashtra 400001<br>
+                        India
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-bright-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Call Us</h3>
+                    <p class="font-source-sans text-gray-600">
+                        +91 98765 43210<br>
+                        +91 98765 43211<br>
+                        (9:00 AM - 7:00 PM)
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-strong-red rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+                            <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-2">Email Us</h3>
+                    <p class="font-source-sans text-gray-600">
+                        info@geniusacademy.com<br>
+                        admissions@geniusacademy.com<br>
+                        support@geniusacademy.com
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-brand-white p-8 rounded-2xl shadow-lg">
+                    <h2 class="font-poppins text-3xl font-bold text-brand-black mb-6">Send us a Message</h2>
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required
+                                       class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all">
+                            </div>
+                            <div>
+                                <label for="lastName" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required
+                                       class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all">
+                        </div>
+                        
+                        <div>
+                            <label for="phone" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" id="phone" name="phone"
+                                   class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all">
+                        </div>
+                        
+                        <div>
+                            <label for="subject" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Subject *</label>
+                            <select id="subject" name="subject" required
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all">
+                                <option value="">Select a subject</option>
+                                <option value="admission">Admission Inquiry</option>
+                                <option value="course">Course Information</option>
+                                <option value="fee">Fee Structure</option>
+                                <option value="support">Technical Support</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="class" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Class (Optional)</label>
+                            <select id="class" name="class"
+                                    class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all">
+                                <option value="">Select your class</option>
+                                <option value="class-9">Class 9</option>
+                                <option value="class-10">Class 10</option>
+                                <option value="class-11">Class 11</option>
+                                <option value="class-12">Class 12</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="5" required
+                                      placeholder="Please describe your query in detail..."
+                                      class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none transition-all resize-none"></textarea>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <input type="checkbox" id="privacy" name="privacy" required
+                                   class="mt-1 mr-3 h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded">
+                            <label for="privacy" class="font-source-sans text-sm text-gray-600">
+                                I agree to the <a href="#" class="text-royal-blue hover:underline">Privacy Policy</a> and 
+                                <a href="#" class="text-royal-blue hover:underline">Terms of Service</a>
+                            </label>
+                        </div>
+                        
+                        <button type="submit" 
+                                class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold text-lg">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Additional Information -->
+                <div class="space-y-8">
+                    <!-- Office Hours -->
+                    <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Office Hours</h3>
+                        <div class="space-y-3">
+                            <div class="flex justify-between">
+                                <span class="font-source-sans text-gray-600">Monday - Friday</span>
+                                <span class="font-source-sans text-brand-black font-semibold">9:00 AM - 7:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-source-sans text-gray-600">Saturday</span>
+                                <span class="font-source-sans text-brand-black font-semibold">9:00 AM - 5:00 PM</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="font-source-sans text-gray-600">Sunday</span>
+                                <span class="font-source-sans text-strong-red font-semibold">Closed</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Quick Links</h3>
+                        <div class="space-y-3">
+                            <a href="courses.html" class="font-source-sans flex items-center text-royal-blue hover:text-blue-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                View Courses
+                            </a>
+                            <a href="auth.html" class="font-source-sans flex items-center text-royal-blue hover:text-blue-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                Student Login
+                            </a>
+                            <a href="about.html" class="font-source-sans flex items-center text-royal-blue hover:text-blue-700 transition-colors">
+                                <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                                About Us
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ -->
+                    <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                        <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Frequently Asked Questions</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <h4 class="font-source-sans font-semibold text-brand-black mb-1">How do I enroll in a course?</h4>
+                                <p class="font-source-sans text-gray-600 text-sm">Click on "Enroll Now" on any course page and complete the registration process.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-source-sans font-semibold text-brand-black mb-1">What are the fees?</h4>
+                                <p class="font-source-sans text-gray-600 text-sm">Fees vary by course and duration. Contact us for detailed fee structure.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-source-sans font-semibold text-brand-black mb-1">Do you offer demo classes?</h4>
+                                <p class="font-source-sans text-gray-600 text-sm">Yes, we offer free demo classes for all our courses.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-16 bg-brand-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="font-poppins text-3xl font-bold text-brand-black mb-4">Find Us on Map</h2>
+                <p class="font-source-sans text-lg text-gray-600">Visit our institute for a personal consultation</p>
+            </div>
+            
+            <!-- <div class="bg-gray-200 rounded-2xl overflow-hidden h-96 flex items-center justify-center">
+                <div class="text-center">
+                     <svg class="w-16 h-16 text-gray-400 mx-auto mb-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                    </svg> 
+                    <iframe 
+    src="https://www.google.com/maps?q=Genius%20Academy%20Mumbai&output=embed" 
+    width="100%" 
+    height="100%" 
+    style="border:0">
+</iframe>
+
+                    <p class="font-source-sans text-gray-600">Interactive map would be integrated here</p>
+                    <p class="font-source-sans text-gray-500 text-sm mt-2">123 Education Street, Mumbai, MH 400001</p>
+                </div>
+            </div> -->
+            <div class="bg-gray-200 rounded-2xl overflow-hidden h-96">
+                <iframe 
+                    src="https://www.google.com/maps?q=Genius%20Academy%20Mumbai&output=embed" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-brand-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-raleway text-2xl font-bold text-royal-blue mb-4">GENIUS ACADEMY</h3>
+                    <p class="font-source-sans text-gray-300 mb-4">Where Learning Never Stops</p>
+                    <p class="font-source-sans text-gray-400 text-sm">
+                        Empowering students with quality education and innovative learning solutions since 2015.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Home</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Courses</a></li>
+                        <li><a href="about.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2">
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 9-10</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 11-12</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">JEE Preparation</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">CAT Preparation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2">
+                        <li class="font-source-sans text-gray-300">📧 info@geniusacademy.com</li>
+                        <li class="font-source-sans text-gray-300">📞 +91 98765 43210</li>
+                        <li class="font-source-sans text-gray-300">📍 123 Education Street, Mumbai, MH 400001</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="font-source-sans text-gray-400 text-sm">
+                    © 2025 Genius Academy. All rights reserved. | Privacy Policy | Terms of Service
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form validation and submission
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // Basic validation
+            if (!data.firstName || !data.lastName || !data.email || !data.subject || !data.message) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            if (!data.privacy) {
+                showNotification('Please accept the privacy policy', 'error');
+                return;
+            }
+            
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(data.email)) {
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            // Simulate form submission
+            showNotification('Sending your message...', 'info');
+            
+            setTimeout(() => {
+                showNotification('Message sent successfully! We will get back to you soon.', 'success');
+                this.reset();
+            }, 2000);
+        });
+        
+        // Real-time form validation
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.style.borderColor = '#DC2626';
+                } else {
+                    this.style.borderColor = '#D1D5DB';
+                }
+            });
+            
+            input.addEventListener('focus', function() {
+                this.style.borderColor = '#2563EB';
+            });
+        });
+    </script>
+    <script src="main.js"></script>
+</body>
+</html>

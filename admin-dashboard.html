@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Genius Academy</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal-blue': '#2563EB',
+                        'bright-yellow': '#FCD34D',
+                        'strong-red': '#DC2626',
+                        'brand-black': '#000000',
+                        'brand-white': '#FFFFFF'
+                    },
+                    fontFamily: {
+                        'raleway': ['Raleway', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'source-sans': ['Source Sans 3', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .sidebar-item {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .sidebar-item:hover {
+            background: rgba(37, 99, 235, 0.1);
+            color: #2563EB;
+        }
+        
+        .sidebar-item.active {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            color: white;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1D4ED8, #2563EB);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body class="font-source-sans bg-gray-50">
+    <div class="flex h-screen bg-gray-50" id="dashboard-container">
+        <!-- Sidebar -->
+        <div class="w-64 bg-brand-white shadow-lg fixed left-0 top-0 h-full z-40" style="overflow-y:auto; overflow-x:hidden;">
+            <div class="p-6">
+                <h1 class="font-raleway text-2xl font-bold text-royal-blue">GENIUS ACADEMY</h1>
+            </div>
+            
+            <nav class="mt-6">
+                <div class="px-4 space-y-2">
+                    <div class="sidebar-item active flex items-center px-4 py-3 rounded-lg" data-section="overview">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Overview</span>
+                    </div>
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="students">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Students</span>
+                    </div>
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="teachers">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Teachers</span>
+                    </div>
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="courses">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Courses</span>
+                    </div>
+                    
+                   
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="fees">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Fees</span>
+                    </div>
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="analysis">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Analysis</span>
+                    </div>
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="notifications">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Notifications</span>
+                    </div>
+                    
+                    <div class="sidebar-item flex items-center px-4 py-3 rounded-lg" data-section="settings">
+                        <svg class="w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="font-montserrat font-medium">Settings</span>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="mt-8 px-4">
+                <button id="logout-btn" class="font-montserrat w-full bg-strong-red text-brand-white px-4 py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                    Logout
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-1 ml-64">
+            <!-- Top Bar -->
+            <div class="bg-brand-white shadow-sm px-8 py-4 flex justify-between items-center">
+                <div>
+                    <h2 class="font-poppins text-2xl font-bold text-brand-black" id="section-title">Admin Dashboard</h2>
+                    <p class="font-source-sans text-gray-600">Welcome back, Admin!</p>
+                </div>
+                
+                <div class="flex items-center space-x-4">
+                    <!-- Notification Bell -->
+                    <div class="relative">
+                        <button id="notification-bell" class="relative p-2 text-gray-600 hover:text-royal-blue transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+                            </svg>
+                            <span class="absolute -top-1 -right-1 bg-strong-red text-brand-white text-xs rounded-full w-5 h-5 flex items-center justify-center">12</span>
+                        </button>
+                        
+                        <!-- Notification Dropdown -->
+                        <div id="notification-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-brand-white rounded-lg shadow-xl border z-50">
+                            <div class="p-4 border-b">
+                                <h3 class="font-poppins font-semibold text-brand-black">System Notifications</h3>
+                            </div>
+                            <div class="max-h-96 overflow-y-auto">
+                                <div class="p-4 border-b hover:bg-gray-50">
+                                    <p class="font-source-sans text-sm font-semibold text-brand-black">New Student Registration</p>
+                                    <p class="font-source-sans text-xs text-gray-600 mt-1">15 new students registered today</p>
+                                    <p class="font-source-sans text-xs text-gray-500 mt-1">2 hours ago</p>
+                                </div>
+                                <div class="p-4 border-b hover:bg-gray-50">
+                                    <p class="font-source-sans text-sm font-semibold text-brand-black">Fee Payment Alert</p>
+                                    <p class="font-source-sans text-xs text-gray-600 mt-1">23 pending fee payments this month</p>
+                                    <p class="font-source-sans text-xs text-gray-500 mt-1">4 hours ago</p>
+                                </div>
+                                <div class="p-4 hover:bg-gray-50">
+                                    <p class="font-source-sans text-sm font-semibold text-brand-black">System Backup Complete</p>
+                                    <p class="font-source-sans text-xs text-gray-600 mt-1">Daily backup completed successfully</p>
+                                    <p class="font-source-sans text-xs text-gray-500 mt-1">1 day ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Profile Avatar -->
+                    <div class="flex items-center space-x-3">
+                        <img src="https://kimi-web-img.moonshot.cn/img/fiverr-res.cloudinary.com/ed85361497779a56c40517fea4021da1e94b2310.jpeg" 
+                             alt="Admin Avatar" class="w-10 h-10 rounded-full object-cover">
+                        <div>
+                            <p class="font-source-sans font-semibold text-brand-black text-sm">Admin User</p>
+                            <p class="font-source-sans text-gray-600 text-xs">System Administrator</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="p-8" id="content-area">
+                <!-- Overview Section -->
+                <div class="content-section" data-section="overview">
+                    <div class="mb-8">
+                        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">Admin Dashboard</h1>
+                        <p class="font-source-sans text-lg text-gray-600">Complete system overview and management</p>
+                    </div>
+                    
+                    <!-- Stats Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-source-sans text-gray-600 text-sm">Total Students</p>
+                                    <p class="font-poppins text-3xl font-bold text-royal-blue">1,247</p>
+                                </div>
+                                <div class="w-12 h-12 bg-royal-blue rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-source-sans text-gray-600 text-sm">Total Teachers</p>
+                                    <p class="font-poppins text-3xl font-bold text-bright-yellow">47</p>
+                                </div>
+                                <div class="w-12 h-12 bg-bright-yellow rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-source-sans text-gray-600 text-sm">Active Courses</p>
+                                    <p class="font-poppins text-3xl font-bold text-strong-red">89</p>
+                                </div>
+                                <div class="w-12 h-12 bg-strong-red rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="font-source-sans text-gray-600 text-sm">Monthly Revenue</p>
+                                    <p class="font-poppins text-3xl font-bold text-green-600">₹2.4M</p>
+                                </div>
+                                <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Add Student Dialog -->
+<!-- Add Student Dialog -->
+<dialog id="addStudentDialog" class="modal">
+    <div class="modal-box">
+        <h2 class="font-bold text-xl mb-4">Add New Student</h2>
+        <input type="text" id="studentName" placeholder="Student Name"
+               class="w-full border p-2 rounded mb-3">
+
+        <button id="saveStudentBtn" class="btn-primary px-4 py-2 rounded">Save</button>
+        <button class="close-modal px-4 py-2 ml-3 rounded bg-gray-300">Close</button>
+    </div>
+</dialog>
+
+<!-- Add Teacher Dialog -->
+<dialog id="addTeacherDialog" class="modal">
+    <div class="modal-box">
+        <h2 class="font-bold text-xl mb-4">Add New Teacher</h2>
+        <input type="text" id="teacherName" placeholder="Teacher Name"
+               class="w-full border p-2 rounded mb-3">
+
+        <button id="saveTeacherBtn" class="btn-primary px-4 py-2 rounded">Save</button>
+        <button class="close-modal px-4 py-2 ml-3 rounded bg-gray-300">Close</button>
+    </div>
+</dialog>
+
+<!-- Add Course Dialog -->
+<dialog id="addCourseDialog" class="modal">
+    <div class="modal-box">
+        <h2 class="font-bold text-xl mb-4">Add Course</h2>
+        <input type="text" id="courseName" placeholder="Course Name"
+               class="w-full border p-2 rounded mb-3">
+
+        <button id="saveCourseBtn" class="btn-primary px-4 py-2 rounded">Save</button>
+        <button class="close-modal px-4 py-2 ml-3 rounded bg-gray-300">Close</button>
+    </div>
+</dialog>
+
+<!-- Send Notification Dialog -->
+<dialog id="sendNotiDialog" class="modal">
+    <div class="modal-box">
+        <h2 class="font-bold text-xl mb-4">Send Notification</h2>
+        <textarea id="notificationMsg" placeholder="Enter message..."
+                  class="w-full border p-2 rounded mb-3"></textarea>
+
+        <button id="sendNotiBtn" class="btn-primary px-4 py-2 rounded">Send</button>
+        <button class="close-modal px-4 py-2 ml-3 rounded bg-gray-300">Close</button>
+    </div>
+</dialog>
+<div class="mb-8">
+    <h2 class="font-poppins text-2xl font-bold text-brand-black mb-6">Quick Actions</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+        <!-- Add Student -->
+        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-royal-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20"> <path d="M8 9a3 3 0 100-6 3 3 0 000 6zM8 11a6 6 0 016 6H2a6 6 0 016-6zM16 7a1 1 0 10-2 0v1h-1a1 1 0 100 2h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1V7z"/> </svg>
+            </div>
+            <h3 class="font-poppins text-lg font-semibold text-brand-black mb-2">Add Student</h3>
+            <button id="btnAddStudent" class="btn-primary px-6 py-2 rounded-lg">Add</button>
+        </div>
+
+        <!-- Add Teacher -->
+        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-bright-yellow rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-brand-black" fill="currentColor" viewBox="0 0 20 20"> <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/> </svg></div>
+            <h3 class="font-poppins text-lg font-semibold text-brand-black mb-2">Add Teacher</h3>
+            <button id="btnAddTeacher" class="btn-primary px-6 py-2 rounded-lg">Add</button>
+        </div>
+
+        <!-- Add Course -->
+        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-strong-red rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20"> <path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z"/> </svg>
+            </div>
+            <h3 class="font-poppins text-lg font-semibold text-brand-black mb-2">Add Course</h3>
+            <button id="btnAddCourse" class="btn-primary px-6 py-2 rounded-lg">Add</button>
+        </div>
+
+        <!-- Send Notification -->
+        <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg text-center">
+            <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20"> <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/> </svg>
+            </div>
+            <h3 class="font-poppins text-lg font-semibold text-brand-black mb-2">Send Notification</h3>
+            <button id="btnSendNoti" class="btn-primary px-6 py-2 rounded-lg">Send</button>
+        </div>
+
+    </div>
+</div>
+<script>
+
+// Open Dialogs
+document.getElementById("btnAddStudent").onclick = () =>
+    document.getElementById("addStudentDialog").showModal();
+
+document.getElementById("btnAddTeacher").onclick = () =>
+    document.getElementById("addTeacherDialog").showModal();
+
+document.getElementById("btnAddCourse").onclick = () =>
+    document.getElementById("addCourseDialog").showModal();
+
+document.getElementById("btnSendNoti").onclick = () =>
+    document.getElementById("sendNotiDialog").showModal();
+
+
+// Close Modal Buttons
+document.querySelectorAll(".close-modal").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll("dialog").forEach(d => d.close());
+    });
+});
+
+
+// Save Student
+document.getElementById("saveStudentBtn").onclick = () => {
+    showNotification("Student added successfully!", "green");
+    document.getElementById("addStudentDialog").close();
+};
+
+// Save Teacher
+document.getElementById("saveTeacherBtn").onclick = () => {
+    showNotification("Teacher added successfully!", "green");
+    document.getElementById("addTeacherDialog").close();
+};
+
+// Save Course
+document.getElementById("saveCourseBtn").onclick = () => {
+    showNotification("Course added successfully!", "green");
+    document.getElementById("addCourseDialog").close();
+};
+
+// Send Notification
+document.getElementById("sendNotiBtn").onclick = () => {
+    showNotification("Notification sent!", "yellow");
+    document.getElementById("sendNotiDialog").close();
+};
+
+</script>
+
+                    
+                    <!-- Recent Activity -->
+                    <div>
+                        <h2 class="font-poppins text-2xl font-bold text-brand-black mb-6">Recent Activity</h2>
+                        <div class="bg-brand-white rounded-2xl shadow-lg p-6">
+                            <div class="space-y-4">
+                                <div class="flex items-start p-4 bg-blue-50 rounded-lg">
+                                    <div class="w-2 h-2 bg-royal-blue rounded-full mt-2 mr-4"></div>
+                                    <div>
+                                        <p class="font-source-sans font-semibold text-brand-black">New Student Registration</p>
+                                        <p class="font-source-sans text-gray-600 text-sm mt-1">John Doe (ID: STU1248) registered for Class 12 Science</p>
+                                        <p class="font-source-sans text-xs text-gray-500 mt-2">15 minutes ago</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start p-4 bg-green-50 rounded-lg">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-4"></div>
+                                    <div>
+                                        <p class="font-source-sans font-semibold text-brand-black">Fee Payment Received</p>
+                                        <p class="font-source-sans text-gray-600 text-sm mt-1">Monthly fee payment of ₹15,000 received from Jane Smith</p>
+                                        <p class="font-source-sans text-xs text-gray-500 mt-2">1 hour ago</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start p-4 bg-yellow-50 rounded-lg">
+                                    <div class="w-2 h-2 bg-bright-yellow rounded-full mt-2 mr-4"></div>
+                                    <div>
+                                        <p class="font-source-sans font-semibold text-brand-black">Teacher Assignment</p>
+                                        <p class="font-source-sans text-gray-600 text-sm mt-1">Dr. Priya Sharma assigned to Physics Class 12B</p>
+                                        <p class="font-source-sans text-xs text-gray-500 mt-2">3 hours ago</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start p-4 bg-purple-50 rounded-lg">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-4"></div>
+                                    <div>
+                                        <p class="font-source-sans font-semibold text-brand-black">Course Updated</p>
+                                        <p class="font-source-sans text-gray-600 text-sm mt-1">Advanced Mathematics syllabus updated for Class 12</p>
+                                        <p class="font-source-sans text-xs text-gray-500 mt-2">5 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students Management Section -->
+                <div class="content-section" data-section="students" style="display: none;">
+                    <div class="mb-8">
+                        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">Student Management</h1>
+                        <p class="font-source-sans text-lg text-gray-600">Manage all students in the system</p>
+                    </div>
+                    
+                    <div class="bg-brand-white rounded-2xl shadow-lg p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                            <h2 class="font-poppins text-2xl font-bold text-brand-black">All Students</h2>
+                            <div class="flex items-center space-x-4">
+                                <input type="text" placeholder="Search students..." 
+                                       class="font-source-sans px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                <button onclick="openModal('addStudentModal')"     class="px-6 py-2 rounded-xl bg-royal-blue text-white font-montserrat font-semibold shadow-md 
+           hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5">Add Studebt</button>
+
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Student ID</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Name</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Email</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Class</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="font-source-sans py-3 px-4">STU001</td>
+                                        <td class="font-source-sans py-3 px-4">John Doe</td>
+                                        <td class="font-source-sans py-3 px-4">john.doe@email.com</td>
+                                        <td class="font-source-sans py-3 px-4">Class 12 - Science</td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span>
+                                        </td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <div class="flex space-x-2">
+                                                <button class="font-montserrat text-royal-blue hover:underline text-sm">Edit</button>
+                                                <button class="font-montserrat text-green-600 hover:underline text-sm">View</button>
+                                                <button class="font-montserrat text-red-600 hover:underline text-sm">Deactivate</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="font-source-sans py-3 px-4">STU002</td>
+                                        <td class="font-source-sans py-3 px-4">Jane Smith</td>
+                                        <td class="font-source-sans py-3 px-4">jane.smith@email.com</td>
+                                        <td class="font-source-sans py-3 px-4">Class 12 - Science</td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span>
+                                        </td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <div class="flex space-x-2">
+                                                <button class="font-montserrat text-royal-blue hover:underline text-sm">Edit</button>
+                                                <button class="font-montserrat text-green-600 hover:underline text-sm">View</button>
+                                                <button class="font-montserrat text-red-600 hover:underline text-sm">Deactivate</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="font-source-sans py-3 px-4">STU003</td>
+                                        <td class="font-source-sans py-3 px-4">Mike Johnson</td>
+                                        <td class="font-source-sans py-3 px-4">mike.johnson@email.com</td>
+                                        <td class="font-source-sans py-3 px-4">Class 11 - Commerce</td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-semibold">Pending</span>
+                                        </td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <div class="flex space-x-2">
+                                                <button class="font-montserrat text-royal-blue hover:underline text-sm">Edit</button>
+                                                <button class="font-montserrat text-green-600 hover:underline text-sm">View</button>
+                                                <button class="font-montserrat text-red-600 hover:underline text-sm">Activate</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="mt-6 flex justify-between items-center">
+                            <p class="font-source-sans text-gray-600">Showing 1 to 10 of 1,247 entries</p>
+                            <div class="flex space-x-2">
+                                <button class="font-montserrat px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">Previous</button>
+                                <button class="font-montserrat px-4 py-2 bg-royal-blue text-brand-white rounded-lg">1</button>
+                                <button class="font-montserrat px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">2</button>
+                                <button class="font-montserrat px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">3</button>
+                                <button class="font-montserrat px-4 py-2 border border-gray-300 rounded-lg text-gray-600 hover:bg-gray-50">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Student Modal -->
+<div id="addStudentModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6">
+        <h2 class="font-poppins text-2xl font-bold mb-4">Add Student</h2>
+
+        <div class="space-y-4">
+            <div>
+                <label class="font-source-sans text-gray-700">Student Name</label>
+                <input type="text" id="studentName" class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-royal-blue">
+            </div>
+
+            <div>
+                <label class="font-source-sans text-gray-700">Email</label>
+                <input type="email" id="studentEmail" class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-royal-blue">
+            </div>
+
+            <div>
+                <label class="font-source-sans text-gray-700">Class</label>
+                <input type="text" id="studentClass" class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-royal-blue">
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-6 space-x-3">
+            <button onclick="closeModal('addStudentModal')"
+                    class="px-5 py-2 rounded-lg border border-gray-300 font-montserrat">
+                Cancel
+            </button>
+            <button onclick="submitStudent()"
+                    class="px-5 py-2 rounded-lg bg-royal-blue text-white font-montserrat">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+                <!-- Teachers Management Section -->
+                <div class="content-section" data-section="teachers" style="display: none;">
+                    <div class="mb-8">
+                        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">Teacher Management</h1>
+                        <p class="font-source-sans text-lg text-gray-600">Manage all teachers in the system</p>
+                    </div>
+                    
+                    <div class="bg-brand-white rounded-2xl shadow-lg p-6">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+                            <h2 class="font-poppins text-2xl font-bold text-brand-black">All Teachers</h2>
+                            <div class="flex items-center space-x-4">
+                                <input type="text" placeholder="Search teachers..." 
+                                       class="font-source-sans px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                <button onclick="openModal('addTeacherModal')" class="px-6 py-2 rounded-xl bg-royal-blue text-white font-montserrat font-semibold shadow-md 
+           hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-0.5">Add Teacher</button>
+
+                            </div>
+                        </div>
+                        
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr class="border-b">
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Teacher ID</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Name</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Subject</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Experience</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Status</th>
+                                        <th class="font-source-sans text-left py-3 px-4 font-semibold text-gray-700">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="font-source-sans py-3 px-4">TCH001</td>
+                                        <td class="font-source-sans py-3 px-4">Dr. Rajesh Kumar</td>
+                                        <td class="font-source-sans py-3 px-4">Mathematics</td>
+                                        <td class="font-source-sans py-3 px-4">15 years</td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span>
+                                        </td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <div class="flex space-x-2">
+                                                <button class="font-montserrat text-royal-blue hover:underline text-sm">Edit</button>
+                                                <button class="font-montserrat text-green-600 hover:underline text-sm">View</button>
+                                                <button class="font-montserrat text-red-600 hover:underline text-sm">Deactivate</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="font-source-sans py-3 px-4">TCH002</td>
+                                        <td class="font-source-sans py-3 px-4">Dr. Priya Sharma</td>
+                                        <td class="font-source-sans py-3 px-4">Physics</td>
+                                        <td class="font-source-sans py-3 px-4">12 years</td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span>
+                                        </td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <div class="flex space-x-2">
+                                                <button class="font-montserrat text-royal-blue hover:underline text-sm">Edit</button>
+                                                <button class="font-montserrat text-green-600 hover:underline text-sm">View</button>
+                                                <button class="font-montserrat text-red-600 hover:underline text-sm">Deactivate</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-b hover:bg-gray-50">
+                                        <td class="font-source-sans py-3 px-4">TCH003</td>
+                                        <td class="font-source-sans py-3 px-4">Prof. Anil Patel</td>
+                                        <td class="font-source-sans py-3 px-4">Chemistry</td>
+                                        <td class="font-source-sans py-3 px-4">18 years</td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-semibold">Active</span>
+                                        </td>
+                                        <td class="font-source-sans py-3 px-4">
+                                            <div class="flex space-x-2">
+                                                <button class="font-montserrat text-royal-blue hover:underline text-sm">Edit</button>
+                                                <button class="font-montserrat text-green-600 hover:underline text-sm">View</button>
+                                                <button class="font-montserrat text-red-600 hover:underline text-sm">Deactivate</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Teacher Modal -->
+<div id="addTeacherModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
+    <div class="bg-white w-full max-w-lg rounded-2xl shadow-xl p-6">
+        <h2 class="font-poppins text-2xl font-bold mb-4">Add Teacher</h2>
+
+        <div class="space-y-4">
+            <div>
+                <label class="font-source-sans text-gray-700">Teacher Name</label>
+                <input type="text" id="teacherName" class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-royal-blue">
+            </div>
+
+            <div>
+                <label class="font-source-sans text-gray-700">Subject</label>
+                <input type="text" id="teacherSubject" class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-royal-blue">
+            </div>
+
+            <div>
+                <label class="font-source-sans text-gray-700">Experience (Years)</label>
+                <input type="number" id="teacherExperience" class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-royal-blue">
+            </div>
+        </div>
+
+        <div class="flex justify-end mt-6 space-x-3">
+            <button onclick="closeModal('addTeacherModal')"
+                    class="px-5 py-2 rounded-lg border border-gray-300 font-montserrat">
+                Cancel
+            </button>
+            <button onclick="submitTeacher()"
+                    class="px-5 py-2 rounded-lg bg-royal-blue text-white font-montserrat">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="notificationBox" class="fixed top-5 right-5 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg hidden">
+</div>
+
+<script>
+    // -------- Open Modal --------
+function openModal(id) {
+    document.getElementById(id).classList.remove("hidden");
+}
+
+// -------- Close Modal --------
+function closeModal(id) {
+    document.getElementById(id).classList.add("hidden");
+}
+
+// -------- Notification --------
+function showNotification(msg, type = "success") {
+    const box = document.getElementById("notificationBox");
+    
+    box.textContent = msg;
+
+    // Colors
+    box.classList.remove("bg-green-600", "bg-red-600");
+    box.classList.add(type === "success" ? "bg-green-600" : "bg-red-600");
+
+    box.classList.remove("hidden");
+
+    setTimeout(() => {
+        box.classList.add("hidden");
+    }, 2500);
+}
+
+
+// -------- Submit Student --------
+function submitStudent() {
+    // Your AJAX/PHP code here
+
+    showNotification("Student added successfully!");
+    closeModal("addStudentModal");
+}
+
+// -------- Submit Teacher --------
+function submitTeacher() {
+    // Your AJAX/PHP code here
+
+    showNotification("Teacher added successfully!");
+    closeModal("addTeacherModal");
+}
+
+</script>
+
+                <!-- Analysis Section -->
+                <div class="content-section" data-section="analysis" style="display: none;">
+                    <div class="mb-8">
+                        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">Analytics & Reports</h1>
+                        <p class="font-source-sans text-lg text-gray-600">Comprehensive system analytics and insights</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Student Enrollment Trends</h3>
+                            <div id="enrollment-chart" style="height: 300px;"></div>
+                        </div>
+                        
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Revenue Analysis</h3>
+                            <div id="revenue-chart" style="height: 300px;"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Course Performance</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Advanced Mathematics</span>
+                                    <span class="font-source-sans font-semibold text-royal-blue">94%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-royal-blue h-2 rounded-full" style="width: 94%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Physics JEE</span>
+                                    <span class="font-source-sans font-semibold text-bright-yellow">87%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-bright-yellow h-2 rounded-full" style="width: 87%"></div>
+                                </div>
+                                
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Chemistry</span>
+                                    <span class="font-source-sans font-semibold text-strong-red">82%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2">
+                                    <div class="bg-strong-red h-2 rounded-full" style="width: 82%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Attendance Summary</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Class 12 Science</span>
+                                    <span class="font-source-sans font-semibold text-green-600">96%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Class 12 Commerce</span>
+                                    <span class="font-source-sans font-semibold text-green-600">93%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Class 11 Science</span>
+                                    <span class="font-source-sans font-semibold text-bright-yellow">89%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Class 11 Commerce</span>
+                                    <span class="font-source-sans font-semibold text-bright-yellow">91%</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Fee Collection Status</h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Collected</span>
+                                    <span class="font-source-sans font-semibold text-green-600">₹2.4M</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Pending</span>
+                                    <span class="font-source-sans font-semibold text-strong-red">₹0.8M</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="font-source-sans text-gray-700">Overdue</span>
+                                    <span class="font-source-sans font-semibold text-gray-600">₹0.2M</span>
+                                </div>
+                                <div class="border-t pt-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="font-source-sans font-semibold text-brand-black">Total Expected</span>
+                                        <span class="font-source-sans font-semibold text-brand-black">₹3.4M</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COURSES SECTION -->
+<!-- COURSES SECTION -->
+<div class="content-section" data-section="courses" style="display: none;">
+    <div class="mb-8">
+        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">Courses</h1>
+        <p class="font-source-sans text-lg text-gray-600">Add and manage all available courses</p>
+    </div>
+
+    <!-- Add Course Button -->
+    <div class="mb-6">
+        <button onclick="openCourseModal()" class="btn-primary text-brand-white px-6 py-3 rounded-lg font-semibold">
+            Add New Course
+        </button>
+    </div>
+
+    <!-- Course Cards -->
+    <div id="course-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+</div>
+
+
+<!-- COURSE MODAL -->
+<div id="course-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-2xl p-6 w-96">
+        <h3 class="text-xl font-bold mb-4" id="course-modal-title">Add Course</h3>
+
+        <div class="mb-4">
+            <label class="block mb-2">Course Name</label>
+            <input id="course-name" type="text" class="w-full border rounded p-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block mb-2">Category</label>
+            <input id="course-category" type="text" class="w-full border rounded p-2">
+        </div>
+
+        <div class="mb-4">
+            <label class="block mb-2">Description</label>
+            <textarea id="course-desc" rows="3" class="w-full border rounded p-2"></textarea>
+        </div>
+
+        <div class="flex gap-4">
+            <button onclick="closeCourseModal()" class="flex-1 bg-gray-300 text-gray-700 px-4 py-2 rounded">
+                Cancel
+            </button>
+            <button onclick="saveCourse()" class="flex-1 btn-primary text-brand-white px-4 py-2 rounded">
+                Save
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    // ===== SAMPLE DATA =====
+    const courses = [
+        { id: 1, name: "Mathematics", category: "Science", description: "Algebra, calculus, geometry" },
+        { id: 2, name: "Physics", category: "Science", description: "Newton laws, motion, forces" },
+        { id: 3, name: "Computer Science", category: "Technology", description: "Basics of coding & logic" }
+    ];
+
+    // ===== INITIAL LOAD =====
+    function loadCourses() {
+        const container = document.getElementById("course-cards");
+        container.innerHTML = "";
+
+        courses.forEach(c => {
+            container.innerHTML += `
+                <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <h3 class="font-semibold text-lg">${c.name}</h3>
+                    <p class="text-gray-600">${c.category}</p>
+                    <p class="text-gray-700 mt-3 mb-4">${c.description}</p>
+
+                    <div class="flex justify-between">
+                        <button onclick="viewCourse(${c.id})"
+                            class="btn-secondary px-3 py-1 rounded">View</button>
+                        <button onclick="editCourse(${c.id})"
+                            class="btn-primary text-white px-3 py-1 rounded">Edit</button>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // ===== MODAL HANDLING =====
+    window.openCourseModal = function () {
+        document.getElementById("course-modal-title").innerText = "Add Course";
+        document.getElementById("course-name").value = "";
+        document.getElementById("course-category").value = "";
+        document.getElementById("course-desc").value = "";
+        document.getElementById("course-modal").classList.remove("hidden");
+
+        window.saveCourse = saveNewCourse;
+    }
+
+    window.closeCourseModal = function () {
+        document.getElementById("course-modal").classList.add("hidden");
+    }
+
+    // ===== SAVE NEW COURSE =====
+    function saveNewCourse() {
+        const name = document.getElementById("course-name").value.trim();
+        const category = document.getElementById("course-category").value.trim();
+        const desc = document.getElementById("course-desc").value.trim();
+
+        if (!name || !category || !desc) {
+            showNotification("Please fill all fields", "error");
+            return;
+        }
+
+        courses.push({
+            id: courses.length + 1,
+            name,
+            category,
+            description: desc
+        });
+
+        closeCourseModal();
+        loadCourses();
+        showNotification("Course added successfully!", "success");
+    }
+
+    // ===== VIEW COURSE =====
+    window.viewCourse = function (id) {
+        const c = courses.find(x => x.id === id);
+        showNotification(
+            `Course: ${c.name}\nCategory: ${c.category}\nDescription: ${c.description}`,
+            "info"
+        );
+    }
+
+    // ===== EDIT COURSE =====
+    window.editCourse = function (id) {
+        const c = courses.find(x => x.id === id);
+
+        document.getElementById("course-modal-title").innerText = "Edit Course";
+        document.getElementById("course-name").value = c.name;
+        document.getElementById("course-category").value = c.category;
+        document.getElementById("course-desc").value = c.description;
+
+        document.getElementById("course-modal").classList.remove("hidden");
+
+        window.saveCourse = function () {
+            c.name = document.getElementById("course-name").value.trim();
+            c.category = document.getElementById("course-category").value.trim();
+            c.description = document.getElementById("course-desc").value.trim();
+
+            closeCourseModal();
+            loadCourses();
+            showNotification("Course updated successfully!", "success");
+
+            window.saveCourse = saveNewCourse; // restore original
+        }
+    }
+
+    loadCourses();
+
+});
+</script>
+
+
+                <!-- Notifications Section -->
+                <div class="content-section" data-section="notifications" style="display: none;">
+                    <div class="mb-8">
+                        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">System Notifications</h1>
+                        <p class="font-source-sans text-lg text-gray-600">Send and manage system-wide notifications</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-2xl font-bold text-brand-black mb-6">Send New Notification</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Target Audience</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                        <option value="all">All Users</option>
+                                        <option value="students">Students Only</option>
+                                        <option value="teachers">Teachers Only</option>
+                                        <option value="admins">Admins Only</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Notification Title</label>
+                                    <input type="text" placeholder="Enter notification title"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Message</label>
+                                    <textarea rows="4" placeholder="Enter your message"
+                                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue resize-none"></textarea>
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                        <option value="low">Low</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="high">High</option>
+                                        <option value="urgent">Urgent</option>
+                                    </select>
+                                </div>
+                                
+                                <button id="noti" type="submit" class="font-montserrat btn-primary text-brand-white w-full py-3 rounded-lg font-semibold">
+                                    Send Notification
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-2xl font-bold text-brand-black mb-6">Recent Notifications</h3>
+                            <div class="space-y-4 max-h-96 overflow-y-auto">
+                                <div class="p-4 border rounded-lg">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-poppins font-semibold text-brand-black">Holiday Announcement</h4>
+                                        <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-semibold">All Users</span>
+                                    </div>
+                                    <p class="font-source-sans text-gray-600 text-sm mb-2">The institute will remain closed on December 25th for Christmas holiday.</p>
+                                    <p class="font-source-sans text-xs text-gray-500">Sent 2 hours ago • High Priority</p>
+                                </div>
+                                
+                                <div class="p-4 border rounded-lg">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-poppins font-semibold text-brand-black">Fee Payment Reminder</h4>
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs font-semibold">Students</span>
+                                    </div>
+                                    <p class="font-source-sans text-gray-600 text-sm mb-2">Please clear your pending fee payments by December 15th to avoid late charges.</p>
+                                    <p class="font-source-sans text-xs text-gray-500">Sent 1 day ago • Medium Priority</p>
+                                </div>
+                                
+                                <div class="p-4 border rounded-lg">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <h4 class="font-poppins font-semibold text-brand-black">System Maintenance</h4>
+                                        <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs font-semibold">All Users</span>
+                                    </div>
+                                    <p class="font-source-sans text-gray-600 text-sm mb-2">Scheduled system maintenance on December 10th from 2:00 AM to 4:00 AM.</p>
+                                    <p class="font-source-sans text-xs text-gray-500">Sent 3 days ago • Urgent Priority</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div class="content-section" data-section="settings" style="display: none;">
+                    <div class="mb-8">
+                        <h1 class="font-raleway text-4xl font-bold text-brand-black mb-2">System Settings</h1>
+                        <p class="font-source-sans text-lg text-gray-600">Configure system preferences and settings</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-2xl font-bold text-brand-black mb-6">Institute Information</h3>
+                            <form class="space-y-4">
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Institute Name</label>
+                                    <input type="text" value="Genius Academy" 
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Tagline</label>
+                                    <input type="text" value="Where Learning Never Stops"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Address</label>
+                                    <textarea rows="3" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue resize-none">123 Education Street, Mumbai, Maharashtra 400001</textarea>
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                                    <input type="tel" value="+91 98765 43210"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                    <input type="email" value="info@geniusacademy.com"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                </div>
+                                
+                                <button  id="update-profile-btn" type="submit" class="font-montserrat btn-primary text-brand-white px-6 py-3 rounded-lg font-semibold">
+                                    Save Changes
+                                </button>
+                            </form>
+                        </div>
+                        
+                        <div class="bg-brand-white p-6 rounded-2xl shadow-lg">
+                            <h3 class="font-poppins text-2xl font-bold text-brand-black mb-6">System Preferences</h3>
+                            <form class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="font-source-sans text-gray-700">Auto Backup</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-royal-blue"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="font-source-sans text-gray-700">Email Notifications</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-royal-blue"></div>
+                                    </label>
+                                </div>
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="font-source-sans text-gray-700">SMS Notifications</span>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" class="sr-only peer">
+                                        <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-royal-blue"></div>
+                                    </label>
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Backup Frequency</label>
+                                    <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                        <option value="daily" selected>Daily</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="monthly">Monthly</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="font-source-sans block text-sm font-medium text-gray-700 mb-2">Session Timeout (minutes)</label>
+                                    <input type="number" value="30" min="15" max="120"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-royal-blue">
+                                </div>
+                                
+                                <button id="change-password-btn" type="submit" class="font-montserrat btn-primary text-brand-white px-6 py-3 rounded-lg font-semibold">
+                                    Save Preferences
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+           <script>
+                // Attach event listeners after DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('update-profile-btn').addEventListener('click', () => {
+        // Here you can also add your profile update logic
+        showNotification('Information updated successfully!', 'success');
+    });
+
+     document.getElementById('noti').addEventListener('click', () => {
+        // Here you can also add your profile update logic
+        showNotification('Notification Sent successfully!', 'success');
+    });
+
+    document.getElementById('change-password-btn').addEventListener('click', () => {
+        // Here you can also add your change password logic
+        showNotification('Preferences Saved successfully!', 'success');
+    });
+});
+
+            </script>
+
+    <script src="main.js"></script>
+</body>
+</html>

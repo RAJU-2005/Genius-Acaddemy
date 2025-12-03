@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genius Academy - Where Learning Never Stops</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;800&family=Poppins:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Animation Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal-blue': '#2563EB',
+                        'bright-yellow': '#FCD34D',
+                        'strong-red': '#DC2626',
+                        'brand-black': '#000000',
+                        'brand-white': '#FFFFFF'
+                    },
+                    fontFamily: {
+                        'raleway': ['Raleway', 'sans-serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                        'source-sans': ['Source Sans 3', 'sans-serif'],
+                        'montserrat': ['Montserrat', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #2563EB 0%, #3B82F6 50%, #60A5FA 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title-text {
+    color: #000;       /* plain black */
+    font-weight: 800;  /* bold */
+}
+
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #FCD34D, #2563EB, #DC2626);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #1D4ED8, #2563EB);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #FCD34D, #FBBF24);
+            color: #000000;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #FBBF24, #F59E0B);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(252, 211, 77, 0.3);
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, #2563EB, #3B82F6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="font-source-sans bg-brand-white">
+    <!-- Navigation -->
+    <nav class="bg-brand-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="font-raleway text-2xl font-bold text-royal-blue">GENIUS ACADEMY</h1>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Home</a>
+                        <a href="courses.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Courses</a>
+                        <a href="about.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">About Us</a>
+                        <a href="contact.html" class="font-montserrat text-brand-black hover:text-royal-blue px-3 py-2 text-sm font-medium transition-colors">Contact Us</a>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <a href="auth.html" class="font-montserrat btn-primary text-brand-white px-6 py-2 rounded-lg text-sm font-semibold">Login / Sign Up</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center relative pt-16">
+        <div class="floating-particles" id="particles"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="text-center lg:text-left">
+                    <h1 class="font-raleway text-5xl lg:text-7xl font-bold text-brand-white mb-6">
+                        <span class="title-text">GENIUS ACADEMY</span>
+                    </h1>
+                    <h2 class="font-poppins text-2xl lg:text-3xl text-bright-yellow mb-4">Where Learning Never Stops</h2>
+                    <p class="font-source-sans text-lg text-brand-white mb-8 leading-relaxed">
+                        Coaching for Classes 9-12 with expert teachers, smart study tools, and real-time tracking. 
+                        Join thousands of students achieving academic excellence through our innovative learning platform.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="auth.html" class="font-montserrat btn-primary text-brand-white px-8 py-4 rounded-lg text-lg font-semibold text-center">Join Now</a>
+                        <a href="courses.html" class="font-montserrat btn-secondary text-brand-black px-8 py-4 rounded-lg text-lg font-semibold text-center">Explore Courses</a>
+                    </div>
+                </div>
+                <div class="relative">
+                    <img src="https://kimi-web-img.moonshot.cn/img/cdn.prod.website-files.com/44151049df6f483a1c5da33e03b87bcf9d7b49a3.jpg" 
+                         alt="Modern Education Technology" 
+                         class="rounded-2xl shadow-2xl w-full h-auto transform hover:scale-105 transition-transform duration-500">
+                    <div class="absolute -top-4 -right-4 bg-bright-yellow text-brand-black px-4 py-2 rounded-lg font-montserrat font-semibold text-sm">
+                        Live Classes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Genius Academy -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-4xl font-bold text-brand-black mb-4">Why Genius Academy?</h2>
+                <p class="font-source-sans text-lg text-gray-600 max-w-2xl mx-auto">
+                    Discover what makes us the preferred choice for academic excellence
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="card-hover bg-brand-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-royal-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Expert Faculty</h3>
+                    <p class="font-source-sans text-gray-600">Learn from experienced teachers with proven track records in competitive exams</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-bright-yellow rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Small Batches</h3>
+                    <p class="font-source-sans text-gray-600">Personalized attention with limited batch sizes for better learning outcomes</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-strong-red rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Performance Tracking</h3>
+                    <p class="font-source-sans text-gray-600">Real-time analytics and detailed progress reports for continuous improvement</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-royal-blue rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-8 h-8 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-4">Doubt Support</h3>
+                    <p class="font-source-sans text-gray-600">24/7 doubt resolution with expert teachers and peer discussion forums</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-brand-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-4xl font-bold text-brand-black mb-4">What Students & Teachers Say</h2>
+                <p class="font-source-sans text-lg text-gray-600">Real experiences from our learning community</p>
+            </div>
+            
+            <div class="splide" id="testimonial-slider">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        <li class="splide__slide">
+                            <div class="bg-gray-50 p-8 rounded-2xl shadow-lg mx-4">
+                                <div class="flex items-center mb-6">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/www.readingandwritinghaven.com/a213a61bd09e5111e221e78e6a36bb142ef526de.jpeg" 
+                                         alt="Student" class="w-16 h-16 rounded-full object-cover mr-4">
+                                    <div>
+                                        <h4 class="font-poppins text-lg font-semibold text-brand-black">Priya Sharma</h4>
+                                        <p class="font-source-sans text-gray-600">Class 12, Science Stream</p>
+                                    </div>
+                                </div>
+                                <p class="font-source-sans text-gray-700 italic mb-4">
+                                    "Genius Academy transformed my learning experience. The small batch size and personalized attention helped me improve my scores by 30%. The doubt resolution system is amazing!"
+                                </p>
+                                <div class="flex text-bright-yellow">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-gray-50 p-8 rounded-2xl shadow-lg mx-4">
+                                <div class="flex items-center mb-6">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/fiverr-res.cloudinary.com/ed85361497779a56c40517fea4021da1e94b2310.jpeg" 
+                                         alt="Teacher" class="w-16 h-16 rounded-full object-cover mr-4">
+                                    <div>
+                                        <h4 class="font-poppins text-lg font-semibold text-brand-black">Dr. Rajesh Kumar</h4>
+                                        <p class="font-source-sans text-gray-600">Mathematics Faculty</p>
+                                    </div>
+                                </div>
+                                <p class="font-source-sans text-gray-700 italic mb-4">
+                                    "Teaching at Genius Academy is rewarding. The platform's analytics help me understand each student's progress and adapt my teaching methods accordingly."
+                                </p>
+                                <div class="flex text-bright-yellow">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="splide__slide">
+                            <div class="bg-gray-50 p-8 rounded-2xl shadow-lg mx-4">
+                                <div class="flex items-center mb-6">
+                                    <img src="https://kimi-web-img.moonshot.cn/img/wpvip.edutopia.org/7b5c5445d8776e5e113a7f57693a00848610ca8c.jpg" 
+                                         alt="Parent" class="w-16 h-16 rounded-full object-cover mr-4">
+                                    <div>
+                                        <h4 class="font-poppins text-lg font-semibold text-brand-black">Anita Patel</h4>
+                                        <p class="font-source-sans text-gray-600">Parent</p>
+                                    </div>
+                                </div>
+                                <p class="font-source-sans text-gray-700 italic mb-4">
+                                    "As a parent, I appreciate the transparent progress tracking and regular updates. My daughter's confidence has grown significantly since joining Genius Academy."
+                                </p>
+                                <div class="flex text-bright-yellow">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Features -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-poppins text-4xl font-bold text-brand-black mb-4">Platform Features</h2>
+                <p class="font-source-sans text-lg text-gray-600">Comprehensive learning ecosystem for academic success</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-royal-blue rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Digital Attendance</h3>
+                    <p class="font-source-sans text-gray-600">Track attendance automatically with smart biometric integration and real-time notifications</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-bright-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Smart Timetable</h3>
+                    <p class="font-source-sans text-gray-600">Dynamic scheduling with automatic updates and conflict resolution for optimal time management</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-strong-red rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/>
+                            <path fill-rule="evenodd" d="M4 5a2 2 0 012-2v1a1 1 0 001 1h6a1 1 0 001-1V3a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Assignments</h3>
+                    <p class="font-source-sans text-gray-600">Digital assignment submission with automated grading and detailed feedback system</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-royal-blue rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zm0 2h12v8H4V6z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Study Materials</h3>
+                    <p class="font-source-sans text-gray-600">Access comprehensive study resources including videos, PDFs, and interactive content</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-bright-yellow rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Online Quizzes</h3>
+                    <p class="font-source-sans text-gray-600">Interactive quizzes with instant feedback and performance analysis for continuous assessment</p>
+                </div>
+                
+                <div class="card-hover bg-brand-white p-6 rounded-2xl shadow-lg">
+                    <div class="w-12 h-12 bg-strong-red rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-brand-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-poppins text-xl font-semibold text-brand-black mb-3">Fees & Analytics</h3>
+                    <p class="font-source-sans text-gray-600">Transparent fee management with detailed financial analytics and payment tracking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CAT Special Program Banner -->
+    <section class="py-16 bg-royal-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="font-poppins text-4xl font-bold text-brand-white mb-4">CAT Special Program</h2>
+                <p class="font-source-sans text-xl text-bright-yellow mb-8">Comprehensive preparation for CAT 2025 with expert guidance</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <div class="text-brand-white text-center">
+                        <div class="text-3xl font-bold">500+</div>
+                        <div class="text-sm">Hours of Classes</div>
+                    </div>
+                    <div class="text-brand-white text-center">
+                        <div class="text-3xl font-bold">50+</div>
+                        <div class="text-sm">Mock Tests</div>
+                    </div>
+                    <div class="text-brand-white text-center">
+                        <div class="text-3xl font-bold">24/7</div>
+                        <div class="text-sm">Doubt Support</div>
+                    </div>
+                    <a href="auth.html" class="font-montserrat bg-bright-yellow text-brand-black px-8 py-4 rounded-lg text-lg font-semibold hover:bg-yellow-400 transition-colors">Join CAT Batch</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-black text-brand-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-raleway text-2xl font-bold text-royal-blue mb-4">GENIUS ACADEMY</h3>
+                    <p class="font-source-sans text-gray-300 mb-4">Where Learning Never Stops</p>
+                    <p class="font-source-sans text-gray-400 text-sm">
+                        Empowering students with quality education and innovative learning solutions since 2015.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Home</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Courses</a></li>
+                        <li><a href="about.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">About Us</a></li>
+                        <li><a href="contact.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2">
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 9-10</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">Class 11-12</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">JEE Preparation</a></li>
+                        <li><a href="courses.html" class="font-source-sans text-gray-300 hover:text-royal-blue transition-colors">CAT Preparation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-poppins text-lg font-semibold mb-4">Contact Info</h4>
+                    <ul class="space-y-2">
+                        <li class="font-source-sans text-gray-300">📧 info@geniusacademy.com</li>
+                        <li class="font-source-sans text-gray-300">📞 +91 98765 43210</li>
+                        <li class="font-source-sans text-gray-300">📍 123 Education Street, Mumbai, MH 400001</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
+                <p class="font-source-sans text-gray-400 text-sm">
+                    © 2025 Genius Academy. All rights reserved. | Privacy Policy | Terms of Service
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>
